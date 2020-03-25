@@ -1,4 +1,4 @@
 # checkmarx-bookstore-java
 Example Java Repo vuln
 
-CxFlowMasterPush-Test13sssssaassssssxx
+CxFlowMasterPush-Test13
