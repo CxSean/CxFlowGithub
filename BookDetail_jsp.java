@@ -2,7 +2,9 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 import org.apache.jasper.runtime.*;
+<%@ page import="java.sql.PreparedStatement" %>
 
+//ddd
 public class BookDetail_jsp extends HttpJspBase {
 
 
@@ -1021,11 +1023,13 @@ sSQL = "update items set rating=rating+" + getParam(request, "rating") + ", rati
 
       
       if ( isEmpty(pitem_id)) { bPK = false; }
-      
-      sWhere += "item_id=" + toSQL(pitem_id, adNumber);
+      PreparedStatement preparedStatement = con.prepareStatement(sql);
+      String sql = "select * from items where " + sWhere + "item_id=?");
+      preparedStatement.setString(1, toSQL(pitem_id, adNumber));
+//      sWhere += "item_id=" + toSQL(pitem_id, adNumber);
       primaryKeyParams += "<input type=\"hidden\" name=\"PK_item_id\" value=\""+pitem_id+"\"/>";
 
-      sSQL = "select * from items where " + sWhere;
+//      sSQL = "select * from items where " + sWhere;
 
 
       out.println("    <table style=\"\">");
@@ -1041,7 +1045,7 @@ sSQL = "update items set rating=rating+" + getParam(request, "rating") + ", rati
       if ( bPK &&  ! (sAction.equals("insert") && "Rating".equals(sForm))) {
 
         // Open recordset
-        rs = openrs( stat, sSQL);
+        ResetSet rs = preparedStatement.executeQuery();
         rs.next();
         String[] aFields = getFieldsName( rs );
         getRecordToHash( rs, rsHash, aFields );
