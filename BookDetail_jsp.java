@@ -4,7 +4,7 @@ import javax.servlet.jsp.*;
 import org.apache.jasper.runtime.*;
 <%@ page import="java.sql.PreparedStatement" %>
 
-//ddddsd
+//ddddsddd
 public class BookDetail_jsp extends HttpJspBase {
 
 
